@@ -15,6 +15,8 @@ def translate_accomp():
 
     print("\n----------------------------------------------------------------\n")
 
+    print(f"> TRANSLATE ACCOMP.")
+    print(f">")
     print(f"> Test content")
 
     print("\n----------------------------------------------------------------\n")
