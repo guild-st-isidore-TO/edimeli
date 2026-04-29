@@ -50,16 +50,23 @@ def write_roman_version(ver_str):
 
 file_dir = os.path.dirname(os.path.realpath(__file__))
 repo_dir = os.path.join(file_dir, "../../")
+input_dir = os.path.join(repo_dir, "input")
+internal_dir = os.path.join(repo_dir, "internal")
+output_dir = os.path.join(repo_dir, "output")
 
 
 def get_cfg_data():
     cfg_data = {
         "gabctk_script_fname": "gabctk.py",
-        "doc_dir": os.path.join(repo_dir, "document"),
-        "data_dir": os.path.join(repo_dir, "data"),
+        "repo_dir": repo_dir,
+        "input_dir": os.path.join(repo_dir, "input"),
+        "internal_dir": os.path.join(repo_dir, "internal"),
+        "output_dir": os.path.join(repo_dir, "output"),
+        "cfg_filename": "edimeli.config.json",
+        "docs_filename": "edimeli.documents.json",
     }
 
-    with open(f"{cfg_data['data_dir']}/configs.json", "r") as file:
+    with open(f"{cfg_data['repo_dir']}/${cfg_data['cfg_filename']}", "r") as file:
         cfg_json = json.load(file)
         cfg_data["gabctk_dir"] = os.path.join(
             repo_dir, cfg_json["paths"]["gabctkDirectory"]
@@ -77,7 +84,7 @@ def get_cfg_data():
             repo_dir, cfg_json["paths"]["dataTemplatesDirectory"]
         )
 
-    with open(f"{cfg_data['data_dir']}/input.json", "r") as file:
+    with open(f"{cfg_data['repo_dir']}/${cfg_data['docs_filename']}", "r") as file:
         input_cfg_json = json.load(file)
         cfg_data["documents"] = input_cfg_json["documents"]
 
