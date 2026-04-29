@@ -9,10 +9,15 @@ from scriptormelicus.scriptor_melicus import write_song_ly, write_title_ly
 
 cfg_data = get_cfg_data()
 
+input_dir_data = pathlib.Path(cfg_data["input_dir"])
+input_dir_list = list(input_dir_data.iterdir())
+input_dir_project_dirs = list(filter(lambda item: item.is_dir(), input_dir_list))
+input_dir_projects = list(map(lambda path_obj: path_obj.name, input_dir_project_dirs))
+
 script_desc = "Transforms models in the given input project"
 
 
-def to_conv_ly_paths(source_doc):
+def get_intermediate_ly_paths(source_doc):
     cleaned_path = source_doc["path"].replace(".gabc", ".ly")
     return os.path.join(cfg_data["output_dir_ly_data"], cleaned_path)
 
@@ -20,13 +25,6 @@ def to_conv_ly_paths(source_doc):
 def translate_voice():
     parser = argparse.ArgumentParser(description=script_desc)
     args = parser.parse_args()
-
-    input_dir_data = pathlib.Path(cfg_data["input_dir"])
-    input_dir_list = list(input_dir_data.iterdir())
-    input_dir_project_dirs = list(filter(lambda item: item.is_dir(), input_dir_list))
-    input_dir_projects = list(
-        map(lambda path_obj: path_obj.name, input_dir_project_dirs)
-    )
 
     print("\n----------------------------------------------------------------\n")
 
@@ -39,7 +37,9 @@ def translate_voice():
     # ARRANGE / COMPOSE
 
     for proj_id in input_dir_projects:
-        proj_meta_path = os.path.join(cfg_data["input_dir"], proj_id, cfg_data["input_meta_filename"])
+        proj_meta_path = os.path.join(
+            cfg_data["input_dir"], proj_id, cfg_data["input_meta_filename"]
+        )
         in_meta = {}
         with open(proj_meta_path) as f:
             in_meta = json.load(f)
@@ -48,7 +48,7 @@ def translate_voice():
         in_doc.update(in_meta)
         in_doc.update({"other_prop1": "dxfadfg", "other_prop2": "khjskfsd"})
 
-        conv_gabc_docs = map(to_conv_ly_paths, in_doc["sourceDocs"])
+        intermediate_ly_paths = map(get_intermediate_ly_paths, in_doc["sourceDocs"])
 
         # ---------
         # Templates
@@ -133,7 +133,7 @@ def translate_voice():
         # write_title_ly(title_gt_solo_path, template_title_path, doc_data)
 
         # Copying LY vars, writing song part
-        for cgd_idx, conv_gabc_doc in enumerate(conv_gabc_docs, start=1):
+        for cgd_idx, conv_gabc_doc in enumerate(intermediate_ly_paths, start=1):
             filename_slug = os.path.basename(conv_gabc_doc).replace(".ly", "")
             filename_slug = filename_slug.replace("-", " ")
             filename_slug = filename_slug.title().replace(" ", "")

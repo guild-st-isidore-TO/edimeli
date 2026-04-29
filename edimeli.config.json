@@ -3,7 +3,7 @@
     "paths": {
         "gabctkDirectory": "../gabctk",
         "dataTemplatesDirectory": "internal/templates",
-        "outputDirectoryLyData": "output/ly-data",
+        "outputDirectoryLyData": "internal/generated",
         "outputDirectoryLy": "output/ly",
         "outputDirectoryMidi": "output/midi",
         "outputDirectoryPdf": "output/pdf",
