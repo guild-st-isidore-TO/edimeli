@@ -63,10 +63,11 @@ def get_cfg_data():
         "internal_dir": os.path.join(repo_dir, "internal"),
         "output_dir": os.path.join(repo_dir, "output"),
         "cfg_filename": "edimeli.config.json",
-        "docs_filename": "edimeli.documents.json",
+        "input_meta_filename": "metadata.json",
     }
+    cfg_data["cfg_filepath"] = os.path.join(cfg_data["repo_dir"], cfg_data["cfg_filename"])
 
-    with open(f"{cfg_data['repo_dir']}/${cfg_data['cfg_filename']}", "r") as file:
+    with open(f"{cfg_data['cfg_filepath']}", "r") as file:
         cfg_json = json.load(file)
         cfg_data["gabctk_dir"] = os.path.join(
             repo_dir, cfg_json["paths"]["gabctkDirectory"]
@@ -83,10 +84,6 @@ def get_cfg_data():
         cfg_data["data_templates_dir"] = os.path.join(
             repo_dir, cfg_json["paths"]["dataTemplatesDirectory"]
         )
-
-    with open(f"{cfg_data['repo_dir']}/${cfg_data['docs_filename']}", "r") as file:
-        input_cfg_json = json.load(file)
-        cfg_data["documents"] = input_cfg_json["documents"]
 
     return cfg_data
 

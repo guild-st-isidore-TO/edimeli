@@ -1,4 +1,5 @@
 import argparse
+import pathlib
 import sys, os, time, json, logging, re
 
 from edimeli.utils import get_cfg_data, write_roman, write_roman_version
@@ -7,9 +8,6 @@ from lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars
 from scriptormelicus.scriptor_melicus import write_song_ly, write_title_ly
 
 cfg_data = get_cfg_data()
-
-with open(os.path.join(cfg_data['repo_dir'], cfg_data['cfg_filename'])) as f:
-    configs_data = json.load(f)
 
 script_desc = "Transforms models in the given input project"
 
@@ -23,17 +21,33 @@ def translate_voice():
     parser = argparse.ArgumentParser(description=script_desc)
     args = parser.parse_args()
 
+    input_dir_data = pathlib.Path(cfg_data["input_dir"])
+    input_dir_list = list(input_dir_data.iterdir())
+    input_dir_project_dirs = list(filter(lambda item: item.is_dir(), input_dir_list))
+    input_dir_projects = list(
+        map(lambda path_obj: path_obj.name, input_dir_project_dirs)
+    )
+
     print("\n----------------------------------------------------------------\n")
 
     print(f"> TRANSLATE VOICE")
     print(f">")
 
-    input_documents = cfg_data["documents"]
+    # input_documents = cfg_data["documents"]
 
     # ------------------------------------
     # ARRANGE / COMPOSE
 
-    for in_doc in input_documents:
+    for proj_id in input_dir_projects:
+        proj_meta_path = os.path.join(cfg_data["input_dir"], proj_id, cfg_data["input_meta_filename"])
+        in_meta = {}
+        with open(proj_meta_path) as f:
+            in_meta = json.load(f)
+
+        in_doc = dict()
+        in_doc.update(in_meta)
+        in_doc.update({"other_prop1": "dxfadfg", "other_prop2": "khjskfsd"})
+
         conv_gabc_docs = map(to_conv_ly_paths, in_doc["sourceDocs"])
 
         # ---------
