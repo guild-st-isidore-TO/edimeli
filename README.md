@@ -6,8 +6,8 @@ Part of the FAVI System: https://github.com/guild-st-isidore-TO/fabrica-virtuali
 
 ---
 
-> STATUS (III Septembris MMXXV)  
-Active Development -- Now extending working functionality while integrating it into the web API.
+> STATUS (XXVIII Aprilis MMXXVI)  
+Active Development -- Refactoring this into a Poetry project for better portability and collaboration
 
 ![Editoris Melicorum mascot image](./docs/static/edi_melicorum_pic.png "Editoris Melicorum mascot image")
 
