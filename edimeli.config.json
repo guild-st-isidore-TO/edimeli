@@ -1,40 +1,12 @@
 {
-    "version": "0.0.7",
+    "version": "0.1.0",
     "paths": {
         "gabctkDirectory": "../gabctk",
-        "dataTemplatesDirectory": "data/templates",
-        "outputDirectoryLyData": "build/ly-data",
-        "outputDirectoryLy": "build/ly",
-        "outputDirectoryMidi": "build/midi",
-        "outputDirectoryPdf": "build/pdf",
-        "outputDirectoryXml": "build/xml"
-    },
-    "opModes": [
-        {
-            "id": 1,
-            "name": "ARRANGE / COMPOSE",
-            "desc": "Create blank sheets for writing out hymn arrangements/cadenze",
-            "nameConfirmation": "create arrangement sheets"
-        },
-        {
-            "id": 2,
-            "name": "DRAFT ARRANGEMENTS",
-            "desc": "Draft songbooks with written arrangements (in .ly files)",
-            "nameConfirmation": "preview your arrangements"
-        },
-        {
-            "id": 3,
-            "name": "PUBLISH ARRANGEMENTS",
-            "desc": "Create songbooks with written arrangements (in .ly files)",
-            "nameConfirmation": "publish your arrangements"
-        }
-    ],
-    "dialog": {
-        "intro": "[Editor Melicus]:  What can we help you with? (enter number)\n[You]:  ",
-        "actionConfirmation": "[Editor Melicus]:  So you'd like us to {}? (y/n)\n                     We'll use settings from \"/data/configs.json\".\n[You]:  ",
-        "exit": "[Editor Melicus]:  Ok, nevermind.",
-        "performingAction1": "[Editor Melicus]:  Order accepted...",
-        "performingAction2": "[Editor Melicus]:  Now preparing to {}...\n",
-        "error": "[Editor Melicus]:  Huh? We can't help you with that."
+        "dataTemplatesDirectory": "internal/templates",
+        "outputDirectoryLyData": "output/ly-data",
+        "outputDirectoryLy": "output/ly",
+        "outputDirectoryMidi": "output/midi",
+        "outputDirectoryPdf": "output/pdf",
+        "outputDirectoryXml": "output/xml"
     }
 }
