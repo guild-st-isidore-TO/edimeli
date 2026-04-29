@@ -166,10 +166,20 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Modelling input/output files
+# EdiMeli input/output files
 input/*
 !input/.gitkeep
 internal/*
 !internal/.gitkeep
 output/*
 !output/.gitkeep
+
+# key internal files
+!internal/layouts
+!internal/layouts/parts
+!internal/templates
+
+# exceptions for old/demo files
+!input/marian-antiphons-simple
+!input/marian-antiphons-solemn
+!input/marian-hymns
