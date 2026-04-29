@@ -4,7 +4,7 @@
         "gabctkDirectory": "../gabctk",
         "dataTemplatesDirectory": "internal/templates",
         "outputDirectoryLyData": "internal/generated",
-        "outputDirectoryLy": "output/ly",
+        "outputDirectoryLy": "internal/generated",
         "outputDirectoryMidi": "output/midi",
         "outputDirectoryPdf": "output/pdf",
         "outputDirectoryXml": "output/xml"

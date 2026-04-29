@@ -73,7 +73,7 @@ def lege_tabulae_gabc(doc_id, proj_id, source_docs):
         ctr_files = ctr_files + 1
 
         outFilePath = os.path.join(
-            cfg_data["output_dir_ly_data"], source_doc["path"]
+            cfg_data["output_dir_ly_data"], proj_id, source_doc["path"]
         ).replace(".gabc", ".ly")
         outFileDir = Path(outFilePath).parent
         Path(outFileDir).mkdir(parents=True, exist_ok=True)

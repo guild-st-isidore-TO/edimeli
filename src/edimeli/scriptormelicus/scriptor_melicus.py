@@ -64,3 +64,19 @@ def write_title_ly(title_filepath, template_filepath, doc_data):
                 twr.write(template_line)
             twr.write("\n\n")
     return 0
+
+def write_layout_ly(layout_filepath, template_filepath, doc_data):
+    # read in template file, replace values in template, copy to title
+    with open(template_filepath) as tf:
+        with open(layout_filepath, "a") as twr:
+            for t_line in tf:
+                template_line = t_line
+                for key, value in template_replace_map.items():
+                    if value in doc_data:
+                        in_string = doc_data[value]
+                        if value in capitalized_vals:
+                            in_string = in_string.upper()
+                        template_line = template_line.replace(key, in_string)
+                twr.write(template_line)
+            twr.write("\n\n")
+    return 0

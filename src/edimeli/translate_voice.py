@@ -5,7 +5,7 @@ import sys, os, time, json, logging, re
 from .utils import get_cfg_data, write_roman, write_roman_version
 from .incoha import incoha
 from .lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars
-from .scriptormelicus.scriptor_melicus import write_song_ly, write_title_ly
+from .scriptormelicus.scriptor_melicus import write_song_ly, write_title_ly, write_layout_ly
 
 cfg_data = get_cfg_data()
 
@@ -68,30 +68,30 @@ def translate_voice():
         # LilyPond variables
 
         vars_vocals_path = os.path.join(
-            cfg_data["output_dir_ly"], f"{in_doc['id']}_vocals.ly"
+            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_vocals.ly"
         )
         vars_lyrics_path = os.path.join(
-            cfg_data["output_dir_ly"], f"{in_doc['id']}_lyrics.ly"
+            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_lyrics.ly"
         )
         vars_gt_comp_path = os.path.join(
-            cfg_data["output_dir_ly"], f"{in_doc['id']}_gt_comp.ly"
+            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_gt_comp.ly"
         )
         vars_gt_solo_path = os.path.join(
-            cfg_data["output_dir_ly"], f"{in_doc['id']}_gt_solo.ly"
+            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_gt_solo.ly"
         )
 
         # ----------------------
         # LilyPond bookpart sets
 
         bookparts_gt_all = os.path.join(
-            cfg_data["output_dir_ly"], f"{in_doc['id']}_bkpts_gt_all.ly"
+            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_bkpts_gt_all.ly"
         )
 
         # ------------------------
         # Document sections, parts
 
         title_gt_all_path = os.path.join(
-            cfg_data["output_dir_ly"], f"{in_doc['id']}_title_gt_all.ly"
+            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_title_gt_all.ly"
         )
 
         # ------------------------
@@ -115,16 +115,17 @@ def translate_voice():
 
         # ------------------------
         # Writing output
-
+        doc_version = "0.8"
         doc_data = {
             "DocTitle": in_doc["name"],
             "DocTitleLat": in_doc["nameLat"],
             "DocPart": "Complete Guitar Version",
             "DocPartLat": "Versio Cuncta Citharœdi",
-            "DocVersion": in_doc["version"],
-            "DocVersionLat": write_roman_version(in_doc["version"]),
+            "DocVersion": doc_version,
+            "DocVersionLat": write_roman_version(doc_version),
         }
         write_title_ly(title_gt_all_path, template_title_path, doc_data)
+        write_layout_ly(title_gt_all_path, template_title_path, doc_data)
 
         # doc_data["DocPart"] = "Guitar Accompanist Version"
         # doc_data["DocPartLat"] = "Versio Citharœdi Auxiliaris"
@@ -179,9 +180,7 @@ def translate_voice():
             # write_song_ly(bookparts_gt_solo, template_gt_solo_path, song_data)
 
         # Create arrangement / composition sheets
-        incoha(in_doc["path"], in_doc["version"])
-        incoha(in_doc["partPaths"][0], in_doc["version"])
-        incoha(in_doc["partPaths"][1], in_doc["version"])
+        incoha(in_doc["path"], doc_version)
 
     print("\n----------------------------------------------------------------\n")
 
