@@ -2,10 +2,10 @@
 
 #(set-default-paper-size "letter")
 
-\include "../build/ly/marian_ant_sim_vocals.ly"
-\include "../build/ly/marian_ant_sim_lyrics.ly"
-\include "../build/ly/marian_ant_sim_gt_comp.ly"
-\include "../build/ly/marian_ant_sim_gt_solo.ly"
+\include "TemplateOutLocation/TemplateFilenameSlug_vocals.ly"
+\include "TemplateOutLocation/TemplateFilenameSlug_lyrics.ly"
+\include "TemplateOutLocation/TemplateFilenameSlug_gt_comp.ly"
+\include "TemplateOutLocation/TemplateFilenameSlug_gt_solo.ly"
 
 \book {
 
@@ -18,7 +18,7 @@
   %%------------------------------------
   %% Title Page
 
-  \include "../build/ly/marian_ant_sim_title_gt_all.ly"
+  \include "TemplateOutLocation/TemplateFilenameSlug_title_gt_solo.ly"
   
   %%------------------------------------
   %% Table of Contents, Preface
@@ -28,6 +28,6 @@
   %%------------------------------------
   %% Main Content
 
-  \include "../build/ly/marian_ant_sim_bkpts_gt_all.ly"
+  \include "TemplateOutLocation/TemplateFilenameSlug_bkpts_gt_solo.ly"
 
 }
