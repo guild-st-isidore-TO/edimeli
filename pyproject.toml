@@ -1,6 +1,6 @@
 [project]
 name = "edimeli"
-version = "0.1.1a2"
+version = "0.1.1a3"
 description = "Editoris Melicorum is a digital music typesetting toolkit for music ministries in Catholic parishes. The toolkit helps build musical arrangements around traditional hymns in Gregorian notation."
 authors = [{ name = "RJ Salvador", email = "salvador.workshop@gmail.com" }]
 readme = "README.md"

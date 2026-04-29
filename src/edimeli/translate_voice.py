@@ -1,7 +1,7 @@
 import argparse
 import sys, os, time, json, logging, re
 
-from ed_melicorum_utils import get_cfg_data, write_roman, write_roman_version
+from edimeli.utils import get_cfg_data, write_roman, write_roman_version
 from praedica_min import praedica_min
 from incoha import incoha
 from lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars
@@ -140,6 +140,8 @@ def translate_voice():
     def to_conv_ly_paths(source_doc):
         cleaned_path = source_doc["path"].replace(".gabc", ".ly")
         return os.path.join(cfg_data["output_dir_ly_data"], cleaned_path)
+    
+    input_documents = cfg_data["documents"]
 
     # ------------------------------------
     # ARRANGE / COMPOSE
