@@ -9,21 +9,21 @@ Part of the FAVI System: https://github.com/guild-st-isidore-TO/fabrica-virtuali
 > STATUS (III Septembris MMXXV)  
 Active Development -- Now extending working functionality while integrating it into the web API.
 
-![Editoris Melicorum mascot image](./static/edi_melicorum_pic.png "Editoris Melicorum mascot image")
+![Editoris Melicorum mascot image](./docs/static/edi_melicorum_pic.png "Editoris Melicorum mascot image")
 
 Editoris Melicorum is a digital music typesetting toolkit for music ministries in Catholic
 parishes. The toolkit helps build musical arrangements around traditional hymns in Gregorian notation.
 As well as laying them out into documents, both for the congregation and the choir/musicians.
 
-For more info, check out [this PDF handout on `EMEL v0.0.7`](./static/emel-antiphons-1.1.pdf)
+For more info, check out [this PDF handout on `EMEL v0.0.7`](./docs/static/emel-antiphons-1.1.pdf)
 
 ### Examples
 
 Different sheet types for the same hymn:
 
-1. [Complete guitar](./static/marian-antiphons-simple-all-v0.8.pdf)
-1. [Guitar accompanist](./static/marian-antiphons-simple-accomp-v0.8.pdf)
-1. [Guitar soloist](./static/marian-antiphons-simple-solo-v0.8.pdf)
+1. [Complete guitar](./docs/static/marian-antiphons-simple-all-v0.8.pdf)
+1. [Guitar accompanist](./docs/static/marian-antiphons-simple-accomp-v0.8.pdf)
+1. [Guitar soloist](./docs/static/marian-antiphons-simple-solo-v0.8.pdf)
 
 ## LOCAL USAGE
 
@@ -268,7 +268,7 @@ The module has been structured to reflect these personas and their division of r
 
 ### Data Flow
 
-![Editoris Melicorum data flow](./static/design/data-flow-v2.svg "Editoris Melicorum data flow")
+![Editoris Melicorum data flow](./docs/static/design/data-flow-v2.svg "Editoris Melicorum data flow")
 
 ## CONTRIBUTING
 
