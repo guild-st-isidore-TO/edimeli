@@ -25,8 +25,13 @@ Different sheet types for the same hymn:
 
 ## LOCAL USAGE
 
-1. Be in the root directory of this repo
-1. Run `python3 src/editorismelicorum/editor_melicus.py`
+### `poetry install`
+
+Sets up the project
+
+### `poetry run translate-voice`
+
+...
 
 ### Setup
 

@@ -2,10 +2,10 @@ import argparse
 import pathlib
 import sys, os, time, json, logging, re
 
-from edimeli.utils import get_cfg_data, write_roman, write_roman_version
-from incoha import incoha
-from lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars
-from scriptormelicus.scriptor_melicus import write_song_ly, write_title_ly
+from .utils import get_cfg_data, write_roman, write_roman_version
+from .incoha import incoha
+from .lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars
+from .scriptormelicus.scriptor_melicus import write_song_ly, write_title_ly
 
 cfg_data = get_cfg_data()
 

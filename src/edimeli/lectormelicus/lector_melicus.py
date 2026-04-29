@@ -8,7 +8,7 @@ import subprocess
 import os
 from pathlib import Path
 
-from edimeli.utils import print_frame, get_cfg_data
+from ..utils import print_frame, get_cfg_data
 
 # -------------
 # CONFIGURATION
