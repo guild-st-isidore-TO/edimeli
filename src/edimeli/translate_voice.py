@@ -46,9 +46,11 @@ def translate_voice():
 
         in_doc = dict()
         in_doc.update(in_meta)
-        in_doc.update({"other_prop1": "dxfadfg", "other_prop2": "khjskfsd"})
+        in_doc.update({"id": proj_id, "other_prop2": "khjskfsd"})
+        print(json.dumps(in_doc, indent=2))
 
         intermediate_ly_paths = map(get_intermediate_ly_paths, in_doc["sourceDocs"])
+        print(json.dumps(list(intermediate_ly_paths), indent=2))
 
         # ---------
         # Templates
@@ -60,7 +62,7 @@ def translate_voice():
             cfg_data["data_templates_dir"], "bookpart_gtr_all.ly"
         )
 
-        gabc_file_meta = lege_tabulae_gabc(in_doc["id"], in_doc["sourceDocs"])
+        gabc_file_meta = lege_tabulae_gabc(in_doc["id"], proj_id, in_doc["sourceDocs"])
 
         # ------------------
         # LilyPond variables

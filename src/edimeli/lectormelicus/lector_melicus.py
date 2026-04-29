@@ -60,13 +60,13 @@ def get_gabc_metadata(gabc_data_file):
     return gabc_metadata
 
 
-def lege_tabulae_gabc(doc_id, source_docs):
+def lege_tabulae_gabc(doc_id, proj_id, source_docs):
     """Converts GABC files to LY"""
     doc_metadata = {}
     ctr_files = 1
 
     for source_doc in source_docs:
-        inFilePath = os.path.join(cfg_data["data_dir"], source_doc["path"])
+        inFilePath = os.path.join(cfg_data["input_dir"], proj_id, source_doc["path"])
         keyTranspose = source_doc["keyTranspose"]
 
         doc_metadata[f"{doc_id}_{ctr_files}"] = get_gabc_metadata(inFilePath)
