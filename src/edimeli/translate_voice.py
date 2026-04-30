@@ -140,14 +140,6 @@ def translate_voice():
         write_title_ly(title_gt_all_path, template_title_path, doc_data)
         write_layout_ly(title_gt_all_path, template_title_path, doc_data)
 
-        # doc_data["DocPart"] = "Guitar Accompanist Version"
-        # doc_data["DocPartLat"] = "Versio Citharœdi Auxiliaris"
-        # write_title_ly(title_gt_accomp_path, template_title_path, doc_data)
-
-        # doc_data["DocPart"] = "Guitar Soloist Version"
-        # doc_data["DocPartLat"] = "Versio Citharœdi Primi"
-        # write_title_ly(title_gt_solo_path, template_title_path, doc_data)
-
         # Copying LY vars, writing song part
         for cgd_idx, conv_gabc_doc in enumerate(intermediate_ly_paths, start=1):
             filename_slug = os.path.basename(conv_gabc_doc).replace(".ly", "")

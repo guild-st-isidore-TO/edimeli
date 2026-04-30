@@ -33,6 +33,10 @@ capitalized_vals = ["DocTitleLat"]
 
 
 def write_song_ly(song_filepath, template_filepath, doc_data):
+    print(f"> write_song_ly()")
+    print(f"    song_filepath: {song_filepath}")
+    print(f"    template_filepath: {template_filepath}")
+    print(f"    doc_data: {doc_data}")
     # read in template file, replace values in template, copy to song
     with open(template_filepath) as tf:
         with open(song_filepath, "a") as twr:
@@ -50,6 +54,10 @@ def write_song_ly(song_filepath, template_filepath, doc_data):
 
 
 def write_title_ly(title_filepath, template_filepath, doc_data):
+    print(f"> write_title_ly()")
+    print(f"    title_filepath: {title_filepath}")
+    print(f"    template_filepath: {template_filepath}")
+    print(f"    doc_data: {doc_data}")
     # read in template file, replace values in template, copy to title
     with open(template_filepath) as tf:
         with open(title_filepath, "a") as twr:
@@ -65,7 +73,12 @@ def write_title_ly(title_filepath, template_filepath, doc_data):
             twr.write("\n\n")
     return 0
 
+
 def write_layout_ly(layout_filepath, template_filepath, doc_data):
+    print(f"> write_layout_ly()")
+    print(f"    layout_filepath: {layout_filepath}")
+    print(f"    template_filepath: {template_filepath}")
+    print(f"    doc_data: {doc_data}")
     # read in template file, replace values in template, copy to title
     with open(template_filepath) as tf:
         with open(layout_filepath, "a") as twr:

@@ -56,7 +56,7 @@ def get_gabc_metadata(gabc_data_file):
                         display_val = display_val.replace(" p. ", " p.")
                     gabc_metadata[meta_pair[0]] = display_val
 
-    print(f"gabc_metadata: {gabc_metadata}")
+    print(f"> gabc_metadata\n{gabc_metadata}")
     return gabc_metadata
 
 
@@ -91,11 +91,11 @@ def lege_tabulae_gabc(doc_id, proj_id, source_docs):
             logfile = open(logfile_path, "w")
             retcode = subprocess.call(cmdString, shell=True, stdout=logfile)
             if retcode < 0:
-                print("gabctk process terminated by signal", -retcode, file=sys.stderr)
+                print("> gabctk process terminated by signal", -retcode, file=sys.stderr)
             else:
-                print("gabctk process returned", retcode, file=sys.stderr)
+                print("> gabctk process returned", retcode, file=sys.stderr)
         except OSError as e:
-            print("Execution failed:", e, file=sys.stderr)
+            print("> Execution failed:", e, file=sys.stderr)
 
     return doc_metadata
 
@@ -173,6 +173,13 @@ def copy_conv_gabc_vars(
     gtr_solo_ly_path,
 ):
     """Reads and copies a file of converted LY code (from gabctk)"""
+    print(f"> copy_conv_gabc_vars()")
+    print(f"    fname_slug: {fname_slug}")
+    print(f"    conv_ly_filepath: {conv_ly_filepath}")
+    print(f"    vocals_ly_path: {vocals_ly_path}")
+    print(f"    lyrics_ly_path: {lyrics_ly_path}")
+    print(f"    gtr_comp_ly_path: {gtr_comp_ly_path}")
+    print(f"    gtr_solo_ly_path: {gtr_solo_ly_path}")
     ly_script_stack = []
     vocals_name = f"Vocals{fname_slug}"
     lyrics_name = f"Lyrics{fname_slug}"

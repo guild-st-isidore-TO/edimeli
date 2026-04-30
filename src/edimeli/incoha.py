@@ -23,6 +23,9 @@ Path(cfg_data["output_dir_pdf"]).mkdir(parents=True, exist_ok=True)
 
 def incoha(doc_path, doc_version):
     """Drafts arrangement / composition sheets"""
+    print(f"> incoha()")
+    print(f"    doc_path: {doc_path}")
+    print(f"    doc_version: {doc_version}")
     out_file_name = os.path.basename(doc_path).replace(".ly", f"-v{doc_version}")
     drafts_data = {}
     drafts_data["in_file_path"] = f"{cfg_data['input_dir']}/{doc_path}"
@@ -39,8 +42,8 @@ def incoha(doc_path, doc_version):
         logfile = open(logfile_path, "w")
         retcode = subprocess.call(drafts_data["cmd_string"], shell=True, stdout=logfile)
         if retcode < 0:
-            print("Lilypond process terminated by signal", -retcode, file=sys.stderr)
+            print("> Lilypond process terminated by signal", -retcode, file=sys.stderr)
         else:
-            print("Lilypond process returned", retcode, file=sys.stderr)
+            print("> Lilypond process returned", retcode, file=sys.stderr)
     except OSError as e:
-        print("Execution failed:", e, file=sys.stderr)
+        print("> Execution failed:", e, file=sys.stderr)
