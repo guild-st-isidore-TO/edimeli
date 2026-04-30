@@ -5,7 +5,11 @@ import sys, os, time, json, logging, re
 from .utils import get_cfg_data, write_roman, write_roman_version
 from .incoha import incoha
 from .lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars
-from .scriptormelicus.scriptor_melicus import write_song_ly, write_title_ly, write_layout_ly
+from .scriptormelicus.scriptor_melicus import (
+    write_song_ly,
+    write_title_ly,
+    write_layout_ly,
+)
 
 cfg_data = get_cfg_data()
 
@@ -37,8 +41,15 @@ def translate_voice():
     # ARRANGE / COMPOSE
 
     for proj_id in input_dir_projects:
+        doc_id = proj_id
+        doc_source_filename = f"{doc_id}.ly"
+        doc_source_path = os.path.join(
+            cfg_data["output_dir_ly_data"], doc_id, doc_source_filename
+        )
+        doc_version = "0.8"
+
         proj_meta_path = os.path.join(
-            cfg_data["input_dir"], proj_id, cfg_data["input_meta_filename"]
+            cfg_data["input_dir"], doc_id, cfg_data["input_meta_filename"]
         )
         in_meta = {}
         with open(proj_meta_path) as f:
@@ -46,7 +57,7 @@ def translate_voice():
 
         in_doc = dict()
         in_doc.update(in_meta)
-        in_doc.update({"id": proj_id, "other_prop2": "khjskfsd"})
+        in_doc.update({"id": doc_id, "path": doc_source_path})
         print(json.dumps(in_doc, indent=2))
 
         intermediate_ly_paths = map(get_intermediate_ly_paths, in_doc["sourceDocs"])
@@ -62,36 +73,36 @@ def translate_voice():
             cfg_data["data_templates_dir"], "bookpart_gtr_all.ly"
         )
 
-        gabc_file_meta = lege_tabulae_gabc(in_doc["id"], proj_id, in_doc["sourceDocs"])
+        gabc_file_meta = lege_tabulae_gabc(in_doc["id"], doc_id, in_doc["sourceDocs"])
 
         # ------------------
         # LilyPond variables
 
         vars_vocals_path = os.path.join(
-            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_vocals.ly"
+            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_vocals.ly"
         )
         vars_lyrics_path = os.path.join(
-            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_lyrics.ly"
+            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_lyrics.ly"
         )
         vars_gt_comp_path = os.path.join(
-            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_gt_comp.ly"
+            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_gt_comp.ly"
         )
         vars_gt_solo_path = os.path.join(
-            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_gt_solo.ly"
+            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_gt_solo.ly"
         )
 
         # ----------------------
         # LilyPond bookpart sets
 
         bookparts_gt_all = os.path.join(
-            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_bkpts_gt_all.ly"
+            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_bkpts_gt_all.ly"
         )
 
         # ------------------------
         # Document sections, parts
 
         title_gt_all_path = os.path.join(
-            cfg_data["output_dir_ly"], proj_id, f"{in_doc['id']}_title_gt_all.ly"
+            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_title_gt_all.ly"
         )
 
         # ------------------------
@@ -115,7 +126,7 @@ def translate_voice():
 
         # ------------------------
         # Writing output
-        doc_version = "0.8"
+        
         doc_data = {
             "DocTitle": in_doc["name"],
             "DocTitleLat": in_doc["nameLat"],

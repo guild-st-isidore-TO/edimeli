@@ -25,7 +25,7 @@ def incoha(doc_path, doc_version):
     """Drafts arrangement / composition sheets"""
     out_file_name = os.path.basename(doc_path).replace(".ly", f"-v{doc_version}")
     drafts_data = {}
-    drafts_data["in_file_path"] = f"{cfg_data['doc_dir']}/{doc_path}"
+    drafts_data["in_file_path"] = f"{cfg_data['input_dir']}/{doc_path}"
     drafts_data["out_file_path"] = f"{cfg_data['output_dir_pdf']}/{out_file_name}"
 
     drafts_data["cmd_string"] = (
