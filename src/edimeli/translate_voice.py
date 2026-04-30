@@ -58,10 +58,12 @@ def translate_voice():
         in_doc = dict()
         in_doc.update(in_meta)
         in_doc.update({"id": doc_id, "path": doc_source_path})
-        print(json.dumps(in_doc, indent=2))
+        print("> in_doc")
+        print("> " + json.dumps(in_doc, indent=2))
 
         intermediate_ly_paths = map(get_intermediate_ly_paths, in_doc["sourceDocs"])
-        print(json.dumps(list(intermediate_ly_paths), indent=2))
+        print("> intermediate_ly_paths")
+        print("> " + json.dumps(list(intermediate_ly_paths), indent=2))
 
         # ---------
         # Templates
@@ -126,7 +128,7 @@ def translate_voice():
 
         # ------------------------
         # Writing output
-        
+
         doc_data = {
             "DocTitle": in_doc["name"],
             "DocTitleLat": in_doc["nameLat"],

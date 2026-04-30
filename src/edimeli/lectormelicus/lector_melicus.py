@@ -87,11 +87,13 @@ def lege_tabulae_gabc(doc_id, proj_id, source_docs):
         )
 
         try:
-            retcode = subprocess.call(cmdString, shell=True)
+            logfile_path = cfg_data["gabctk_log_filepath"]
+            logfile = open(logfile_path, "w")
+            retcode = subprocess.call(cmdString, shell=True, stdout=logfile)
             if retcode < 0:
-                print("Child process terminated by signal", -retcode, file=sys.stderr)
+                print("gabctk process terminated by signal", -retcode, file=sys.stderr)
             else:
-                print("Child process returned", retcode, file=sys.stderr)
+                print("gabctk process returned", retcode, file=sys.stderr)
         except OSError as e:
             print("Execution failed:", e, file=sys.stderr)
 

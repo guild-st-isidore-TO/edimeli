@@ -66,6 +66,8 @@ def get_cfg_data():
         "input_meta_filename": "metadata.json",
     }
     cfg_data["cfg_filepath"] = os.path.join(cfg_data["repo_dir"], cfg_data["cfg_filename"])
+    cfg_data["gabctk_log_filepath"] = os.path.join(cfg_data["internal_dir"], 'gabctk_log.txt')
+    cfg_data["lilypond_log_filepath"] = os.path.join(cfg_data["internal_dir"], 'lilypond_log.txt')
 
     with open(f"{cfg_data['cfg_filepath']}", "r") as file:
         cfg_json = json.load(file)

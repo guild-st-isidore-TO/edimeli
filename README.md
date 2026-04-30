@@ -2,8 +2,6 @@
 
 Editors of Melodies - GSI's music typesetting toolkit
 
-Part of the FAVI System: https://github.com/guild-st-isidore-TO/fabrica-virtualis
-
 ---
 
 > STATUS (XXVIII Aprilis MMXXVI)  
@@ -54,27 +52,6 @@ https://github.com/frescobaldi/frescobaldi/wiki
 ## CONFIGURATION
 
 ...
-
-## DESIGN
-
-### Philosophy
-
-The module can be thought of as a publishing house (**Editoris Melicorum**) run by several people:
-
-1. **Editor**, _(in Chief)_  
-Sets up jobs, sends deliverables
-1. **Lector**, _the Reader_  
-Reads source documents, prepares them for further arrangement
-1. **Scriptor**, _the Writer (Engraver)_  
-Combines source documents and prepared arrangements, and engraves new copies
-1. **Scholasticus**, _the Scholar_  
-Knowledge resource for the rest of the team
-
-The module has been structured to reflect these personas and their division of responsibilities.
-
-### Data Flow
-
-![Editoris Melicorum data flow](./docs/static/design/data-flow-v2.svg "Editoris Melicorum data flow")
 
 ## CONTRIBUTING
 

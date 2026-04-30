@@ -35,10 +35,12 @@ def incoha(doc_path, doc_version):
     print_frame("USING LILYPOND", cfg_data, drafts_data)
 
     try:
-        retcode = subprocess.call(drafts_data["cmd_string"], shell=True)
+        logfile_path = cfg_data["lilypond_log_filepath"]
+        logfile = open(logfile_path, "w")
+        retcode = subprocess.call(drafts_data["cmd_string"], shell=True, stdout=logfile)
         if retcode < 0:
-            print("Child process terminated by signal", -retcode, file=sys.stderr)
+            print("Lilypond process terminated by signal", -retcode, file=sys.stderr)
         else:
-            print("Child process returned", retcode, file=sys.stderr)
+            print("Lilypond process returned", retcode, file=sys.stderr)
     except OSError as e:
         print("Execution failed:", e, file=sys.stderr)
