@@ -106,6 +106,9 @@ def translate_voice():
         title_gt_all_path = os.path.join(
             cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_title_gt_all.ly"
         )
+        layout_gt_all_path = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_layout_gt_all.ly"
+        )
 
         # ------------------------
         # Preparing to write to files
@@ -119,10 +122,22 @@ def translate_voice():
             # bookparts_gt_accomp,
             # bookparts_gt_solo,
             title_gt_all_path,
+            layout_gt_all_path,
             # title_gt_accomp_path,
             # title_gt_solo_path,
         ]
         for fpath in clear_fpaths:
+            fpath_dir = pathlib.Path(fpath).parents[0]
+            try:
+                os.makedirs(fpath_dir)
+                print(f"> Nested directories '{fpath_dir}' created successfully.")
+            except FileExistsError:
+                print(f"> One or more directories in '{fpath_dir}' already exist.")
+            except PermissionError:
+                print(f"> Permission denied: Unable to create '{fpath_dir}'.")
+            except Exception as e:
+                print(f"> An error occurred: {e}")
+
             with open(fpath, "w") as ofile:
                 ofile.write("\n")  # clearing text
 

@@ -2,9 +2,7 @@
     "version": "0.1.0",
     "paths": {
         "gabctkDirectory": "../gabctk",
-        "dataTemplatesDirectory": "internal/templates",
-        "outputDirectoryLyData": "internal/generated",
-        "outputDirectoryLy": "internal/generated",
+        "outputDirectoryLy": "output/ly",
         "outputDirectoryMidi": "output/midi",
         "outputDirectoryPdf": "output/pdf",
         "outputDirectoryXml": "output/xml"

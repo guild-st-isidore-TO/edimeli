@@ -20,6 +20,9 @@ Path(cfg_data["output_dir_ly_data"]).mkdir(parents=True, exist_ok=True)
 
 
 def get_gabc_metadata(gabc_data_file):
+    print(f"> get_gabc_metadata()")
+    print(f"    gabc_data_file: {gabc_data_file}")
+
     source_abbrevs = {
         "Liber antiphonarius, 1960": "L.Ant '60",
         "The Liber Usualis, 1961": "L.Usu '61",
@@ -56,12 +59,16 @@ def get_gabc_metadata(gabc_data_file):
                         display_val = display_val.replace(" p. ", " p.")
                     gabc_metadata[meta_pair[0]] = display_val
 
-    print(f"> gabc_metadata\n{gabc_metadata}")
+    print(f"    gabc_metadata:\n{gabc_metadata}")
     return gabc_metadata
 
 
 def lege_tabulae_gabc(doc_id, proj_id, source_docs):
     """Converts GABC files to LY"""
+    print(f"> lege_tabulae_gabc()")
+    print(f"    doc_id: {doc_id}")
+    print(f"    proj_id: {proj_id}")
+    print(f"    source_docs: {source_docs}")
     doc_metadata = {}
     ctr_files = 1
 
@@ -96,7 +103,7 @@ def lege_tabulae_gabc(doc_id, proj_id, source_docs):
                 print("> gabctk process returned", retcode, file=sys.stderr)
         except OSError as e:
             print("> Execution failed:", e, file=sys.stderr)
-
+    print(f"    doc_metadata:\n{doc_metadata}")
     return doc_metadata
 
 

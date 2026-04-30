@@ -2,9 +2,18 @@ import os
 import json
 from collections import OrderedDict
 
+file_dir = os.path.dirname(os.path.realpath(__file__))
+repo_dir = os.path.join(file_dir, "../../")
+input_dir = os.path.join(repo_dir, "input")
+internal_dir = os.path.join(repo_dir, "internal")
+output_dir = os.path.join(repo_dir, "output")
+
+output_ly_dir = os.path.join(output_dir, "ly")
+templates_dir = os.path.join(internal_dir, "templates")
+generated_dir = output_ly_dir
+
 
 def write_roman(num):
-
     roman = OrderedDict()
     roman[1000] = "M"
     roman[900] = "CM"
@@ -48,13 +57,6 @@ def write_roman_version(ver_str):
     return out_str
 
 
-file_dir = os.path.dirname(os.path.realpath(__file__))
-repo_dir = os.path.join(file_dir, "../../")
-input_dir = os.path.join(repo_dir, "input")
-internal_dir = os.path.join(repo_dir, "internal")
-output_dir = os.path.join(repo_dir, "output")
-
-
 def get_cfg_data():
     cfg_data = {
         "gabctk_script_fname": "gabctk.py",
@@ -66,26 +68,22 @@ def get_cfg_data():
         "input_meta_filename": "metadata.json",
     }
     cfg_data["cfg_filepath"] = os.path.join(repo_dir, cfg_data["cfg_filename"])
-    cfg_data["gabctk_log_filepath"] = os.path.join(internal_dir, 'gabctk_log.txt')
-    cfg_data["lilypond_log_filepath"] = os.path.join(internal_dir, 'lilypond_log.txt')
+    cfg_data["gabctk_log_filepath"] = os.path.join(internal_dir, "gabctk_log.txt")
+    cfg_data["lilypond_log_filepath"] = os.path.join(internal_dir, "lilypond_log.txt")
 
     with open(f"{cfg_data['cfg_filepath']}", "r") as file:
         cfg_json = json.load(file)
         cfg_data["gabctk_dir"] = os.path.join(
             repo_dir, cfg_json["paths"]["gabctkDirectory"]
         )
-        cfg_data["output_dir_ly_data"] = os.path.join(
-            repo_dir, cfg_json["paths"]["outputDirectoryLyData"]
-        )
+        cfg_data["output_dir_ly_data"] = generated_dir
         cfg_data["output_dir_ly"] = os.path.join(
             repo_dir, cfg_json["paths"]["outputDirectoryLy"]
         )
         cfg_data["output_dir_pdf"] = os.path.join(
             repo_dir, cfg_json["paths"]["outputDirectoryPdf"]
         )
-        cfg_data["data_templates_dir"] = os.path.join(
-            repo_dir, cfg_json["paths"]["dataTemplatesDirectory"]
-        )
+        cfg_data["data_templates_dir"] = templates_dir
 
     return cfg_data
 
