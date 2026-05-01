@@ -12,8 +12,8 @@
   %%------------------------------------
   %% Header & Paper Configurations
 
-  \include "./editoris_melicorum_header.ly"
-  \include "./editoris_melicorum_paper.ly"
+  \include "./ed_melicorum_header.ly"
+  \include "./ed_melicorum_paper.ly"
 
   %%------------------------------------
   %% Title Page
@@ -23,7 +23,7 @@
   %%------------------------------------
   %% Table of Contents, Preface
 
-  \include "./editoris_melicorum_toc_preface.ly"
+  \include "./ed_melicorum_toc_preface.ly"
 
   %%------------------------------------
   %% Main Content

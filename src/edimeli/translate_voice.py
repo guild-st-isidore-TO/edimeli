@@ -4,7 +4,7 @@ import sys, os, time, json, logging, re
 
 from .utils import get_cfg_data, write_roman, write_roman_version
 from .incoha import incoha
-from .lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars
+from .lectormelicus.lector_melicus import lege_tabulae_gabc, copy_conv_gabc_vars, copy_static_files
 from .scriptormelicus.scriptor_melicus import (
     write_song_ly,
     write_title_ly,
@@ -136,6 +136,7 @@ def translate_voice():
             # title_gt_accomp_path,
             # title_gt_solo_path,
         ]
+
         for fpath in clear_fpaths:
             fpath_dir = pathlib.Path(fpath).parents[0]
             try:
@@ -150,6 +151,8 @@ def translate_voice():
 
             with open(fpath, "w") as ofile:
                 ofile.write("\n")  # clearing text
+
+        copy_static_files(doc_id)
 
         # ------------------------
         # Writing output

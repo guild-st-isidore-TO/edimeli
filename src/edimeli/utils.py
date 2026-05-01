@@ -12,6 +12,12 @@ output_ly_dir = os.path.join(output_dir, "ly")
 templates_dir = os.path.join(internal_dir, "templates")
 generated_dir = output_ly_dir
 
+static_internal_paths = [
+    "ed_melicorum_header.ly",
+    "ed_melicorum_paper.ly",
+    "ed_melicorum_toc_preface.ly",
+]
+
 
 def write_roman(num):
     roman = OrderedDict()
@@ -64,6 +70,10 @@ def get_cfg_data():
         "input_dir": input_dir,
         "internal_dir": internal_dir,
         "output_dir": output_dir,
+        "output_ly_dir": output_ly_dir,
+        "static_internal_paths": static_internal_paths,
+        "output_dir_ly_data": generated_dir,
+        "data_templates_dir": templates_dir,
         "cfg_filename": "edimeli.config.json",
         "input_meta_filename": "metadata.json",
     }
@@ -76,14 +86,12 @@ def get_cfg_data():
         cfg_data["gabctk_dir"] = os.path.join(
             repo_dir, cfg_json["paths"]["gabctkDirectory"]
         )
-        cfg_data["output_dir_ly_data"] = generated_dir
         cfg_data["output_dir_ly"] = os.path.join(
             repo_dir, cfg_json["paths"]["outputDirectoryLy"]
         )
         cfg_data["output_dir_pdf"] = os.path.join(
             repo_dir, cfg_json["paths"]["outputDirectoryPdf"]
         )
-        cfg_data["data_templates_dir"] = templates_dir
 
     return cfg_data
 

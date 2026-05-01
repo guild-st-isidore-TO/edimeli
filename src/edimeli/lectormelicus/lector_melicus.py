@@ -3,9 +3,7 @@
 
 # The Reader of Music is in charge of copying and editing music from outside the shop.
 
-import sys
-import subprocess
-import os
+import sys, subprocess, os, shutil
 from pathlib import Path
 
 from ..utils import print_frame, get_cfg_data
@@ -63,6 +61,28 @@ def get_gabc_metadata(gabc_data_file):
     return gabc_metadata
 
 
+def copy_static_files(doc_id):
+    def get_static_outpath_obj(static_in_path):
+        print(f"> copy_static_files()")
+        print(f"    static_in_path: {static_in_path}")
+        in_path = os.path.join(cfg_data["data_templates_dir"], static_in_path)
+        out_path = os.path.join(cfg_data["output_ly_dir"], doc_id, static_in_path)
+        print(f"    in_path: {in_path}")
+        print(f"    out_path: {out_path}")
+        return {
+            'in': in_path,
+            'out': out_path,
+        }
+    static_filepaths = cfg_data['static_internal_paths']
+    static_out_path_data = list(map(get_static_outpath_obj, static_filepaths))
+
+    for out_idx, out_path_obj in enumerate(static_out_path_data, start=1):
+        src = out_path_obj['in']
+        dest = out_path_obj['out']
+        shutil.copy(src, dest)
+
+
+
 def lege_tabulae_gabc(doc_id, source_docs):
     """Converts GABC files to LY"""
     print(f"> lege_tabulae_gabc()")
@@ -97,7 +117,9 @@ def lege_tabulae_gabc(doc_id, source_docs):
             logfile = open(logfile_path, "w")
             retcode = subprocess.call(cmdString, shell=True, stdout=logfile)
             if retcode < 0:
-                print("> gabctk process terminated by signal", -retcode, file=sys.stderr)
+                print(
+                    "> gabctk process terminated by signal", -retcode, file=sys.stderr
+                )
             else:
                 print("> gabctk process returned", retcode, file=sys.stderr)
         except OSError as e:
