@@ -1,0 +1,32 @@
+{
+    "tags": [],
+    "name": "Marian Antiphons (Simple Tone)",
+    "nameLat": "Antiphonæ Mariæ (Tono Simplici)",
+    "author": "rjsalvadorr",
+    "sourceDocs": [
+        {
+            "id": "alma_red_sim",
+            "keyTranspose": 0,
+            "path": "01-alma-redemptoris-mater-sim.gabc",
+            "name": "Alma Redemptoris Mater"
+        },
+        {
+            "id": "ave_reg_sim",
+            "keyTranspose": 0,
+            "path": "02-ave-regina-caelorum-sim.gabc",
+            "name": "Ave Regina Cælorum"
+        },
+        {
+            "id": "regina_cae_sim",
+            "keyTranspose": 0,
+            "path": "03-regina-caeli-sim.gabc",
+            "name": "Regina Cæli"
+        },
+        {
+            "id": "salve_reg_sim",
+            "keyTranspose": 2,
+            "path": "04-salve-regina-sim.gabc",
+            "name": "Salve Regina"
+        }
+    ]
+}

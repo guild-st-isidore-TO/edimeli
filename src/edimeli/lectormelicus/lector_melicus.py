@@ -3,12 +3,10 @@
 
 # The Reader of Music is in charge of copying and editing music from outside the shop.
 
-import sys
-import subprocess
-import os
+import sys, subprocess, os, shutil
 from pathlib import Path
 
-from ed_melicorum_utils import print_frame, get_cfg_data
+from ..utils import print_frame, get_cfg_data
 
 # -------------
 # CONFIGURATION
@@ -20,6 +18,9 @@ Path(cfg_data["output_dir_ly_data"]).mkdir(parents=True, exist_ok=True)
 
 
 def get_gabc_metadata(gabc_data_file):
+    print(f"> get_gabc_metadata()")
+    print(f"    gabc_data_file: {gabc_data_file}")
+
     source_abbrevs = {
         "Liber antiphonarius, 1960": "L.Ant '60",
         "The Liber Usualis, 1961": "L.Usu '61",
@@ -56,24 +57,49 @@ def get_gabc_metadata(gabc_data_file):
                         display_val = display_val.replace(" p. ", " p.")
                     gabc_metadata[meta_pair[0]] = display_val
 
-    print(f"gabc_metadata: {gabc_metadata}")
+    print(f"    gabc_metadata:\n{gabc_metadata}")
     return gabc_metadata
+
+
+def copy_static_files(doc_id):
+    def get_static_outpath_obj(static_in_path):
+        print(f"> copy_static_files()")
+        print(f"    static_in_path: {static_in_path}")
+        in_path = os.path.join(cfg_data["data_templates_dir"], static_in_path)
+        out_path = os.path.join(cfg_data["output_ly_dir"], doc_id, static_in_path)
+        print(f"    in_path: {in_path}")
+        print(f"    out_path: {out_path}")
+        return {
+            'in': in_path,
+            'out': out_path,
+        }
+    static_filepaths = cfg_data['static_internal_paths']
+    static_out_path_data = list(map(get_static_outpath_obj, static_filepaths))
+
+    for out_idx, out_path_obj in enumerate(static_out_path_data, start=1):
+        src = out_path_obj['in']
+        dest = out_path_obj['out']
+        shutil.copy(src, dest)
+
 
 
 def lege_tabulae_gabc(doc_id, source_docs):
     """Converts GABC files to LY"""
+    print(f"> lege_tabulae_gabc()")
+    print(f"    doc_id: {doc_id}")
+    print(f"    source_docs: {source_docs}")
     doc_metadata = {}
     ctr_files = 1
 
     for source_doc in source_docs:
-        inFilePath = os.path.join(cfg_data["data_dir"], source_doc["path"])
+        inFilePath = os.path.join(cfg_data["input_dir"], doc_id, source_doc["path"])
         keyTranspose = source_doc["keyTranspose"]
 
         doc_metadata[f"{doc_id}_{ctr_files}"] = get_gabc_metadata(inFilePath)
         ctr_files = ctr_files + 1
 
         outFilePath = os.path.join(
-            cfg_data["output_dir_ly_data"], source_doc["path"]
+            cfg_data["output_dir_ly_data"], doc_id, source_doc["path"]
         ).replace(".gabc", ".ly")
         outFileDir = Path(outFilePath).parent
         Path(outFileDir).mkdir(parents=True, exist_ok=True)
@@ -87,14 +113,18 @@ def lege_tabulae_gabc(doc_id, source_docs):
         )
 
         try:
-            retcode = subprocess.call(cmdString, shell=True)
+            logfile_path = cfg_data["gabctk_log_filepath"]
+            logfile = open(logfile_path, "w")
+            retcode = subprocess.call(cmdString, shell=True, stdout=logfile)
             if retcode < 0:
-                print("Child process terminated by signal", -retcode, file=sys.stderr)
+                print(
+                    "> gabctk process terminated by signal", -retcode, file=sys.stderr
+                )
             else:
-                print("Child process returned", retcode, file=sys.stderr)
+                print("> gabctk process returned", retcode, file=sys.stderr)
         except OSError as e:
-            print("Execution failed:", e, file=sys.stderr)
-
+            print("> Execution failed:", e, file=sys.stderr)
+    print(f"    doc_metadata:\n{doc_metadata}")
     return doc_metadata
 
 
@@ -171,6 +201,13 @@ def copy_conv_gabc_vars(
     gtr_solo_ly_path,
 ):
     """Reads and copies a file of converted LY code (from gabctk)"""
+    print(f"> copy_conv_gabc_vars()")
+    print(f"    fname_slug: {fname_slug}")
+    print(f"    conv_ly_filepath: {conv_ly_filepath}")
+    print(f"    vocals_ly_path: {vocals_ly_path}")
+    print(f"    lyrics_ly_path: {lyrics_ly_path}")
+    print(f"    gtr_comp_ly_path: {gtr_comp_ly_path}")
+    print(f"    gtr_solo_ly_path: {gtr_solo_ly_path}")
     ly_script_stack = []
     vocals_name = f"Vocals{fname_slug}"
     lyrics_name = f"Lyrics{fname_slug}"

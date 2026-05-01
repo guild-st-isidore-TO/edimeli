@@ -1,20 +1,20 @@
 [project]
-name = "editoris-melicorum"
-version = "0.1.0"
-description = "Editoris Melicorum is a digital music typesetting toolkit for music ministries in Catholic parishes. The toolkit helps build musical arrangements around traditional hymns in Gregorian notation."
+name = "edimeli"
+version = "0.1.1"
+description = "EdiMeli is a music typesetting toolkit for musicians working with Gregorian notation (square notes)."
 authors = [{ name = "RJ Salvador", email = "salvador.workshop@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = []
 
 [tool.poetry]
-packages = [{include = "editorismelicorum", from = "src"}]
+packages = [{include = "edimeli", from = "src"}]
 package-mode = false
 
 [tool.poetry.scripts]
-translate-voice = "src.editorismelicorum.translate_voice:translate_voice"
-translate-solo = "src.editorismelicorum.translate_solo:translate_solo"
-translate-accomp = "src.editorismelicorum.translate_accomp:translate_accomp"
+translate-all = "src.edimeli.translate_all:translate_all"
+translate-solo = "src.edimeli.translate_solo:translate_solo"
+translate-accomp = "src.edimeli.translate_accomp:translate_accomp"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

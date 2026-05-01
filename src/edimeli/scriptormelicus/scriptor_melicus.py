@@ -6,7 +6,7 @@
 import os
 from pathlib import Path
 
-from ed_melicorum_utils import print_frame, get_cfg_data
+from ..utils import print_frame, get_cfg_data
 
 template_replace_map = {
     "TemplateTitle": "Title",
@@ -27,12 +27,18 @@ template_replace_map = {
     "TemplateDocPart": "DocPart",
     "TemplateDocVersionLat": "DocVersionLat",
     "TemplateDocVersion": "DocVersion",
+    "TemplateOutLocation": "OutLocation",
+    "TemplateFilenameSlug": "FilenameSlug",
 }
 
 capitalized_vals = ["DocTitleLat"]
 
 
 def write_song_ly(song_filepath, template_filepath, doc_data):
+    print(f"> write_song_ly()")
+    print(f"    song_filepath: {song_filepath}")
+    print(f"    template_filepath: {template_filepath}")
+    print(f"    doc_data: {doc_data}")
     # read in template file, replace values in template, copy to song
     with open(template_filepath) as tf:
         with open(song_filepath, "a") as twr:
@@ -50,9 +56,34 @@ def write_song_ly(song_filepath, template_filepath, doc_data):
 
 
 def write_title_ly(title_filepath, template_filepath, doc_data):
+    print(f"> write_title_ly()")
+    print(f"    title_filepath: {title_filepath}")
+    print(f"    template_filepath: {template_filepath}")
+    print(f"    doc_data: {doc_data}")
     # read in template file, replace values in template, copy to title
     with open(template_filepath) as tf:
         with open(title_filepath, "a") as twr:
+            for t_line in tf:
+                template_line = t_line
+                for key, value in template_replace_map.items():
+                    if value in doc_data:
+                        in_string = doc_data[value]
+                        if value in capitalized_vals:
+                            in_string = in_string.upper()
+                        template_line = template_line.replace(key, in_string)
+                twr.write(template_line)
+            twr.write("\n\n")
+    return 0
+
+
+def write_layout_ly(layout_filepath, template_filepath, doc_data):
+    print(f"> write_layout_ly()")
+    print(f"    layout_filepath: {layout_filepath}")
+    print(f"    template_filepath: {template_filepath}")
+    print(f"    doc_data: {doc_data}")
+    # read in template file, replace values in template, copy to title
+    with open(template_filepath) as tf:
+        with open(layout_filepath, "a") as twr:
             for t_line in tf:
                 template_line = t_line
                 for key, value in template_replace_map.items():

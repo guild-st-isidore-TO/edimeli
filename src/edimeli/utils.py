@@ -2,9 +2,24 @@ import os
 import json
 from collections import OrderedDict
 
+file_dir = os.path.dirname(os.path.realpath(__file__))
+repo_dir = os.path.join(file_dir, "../../")
+input_dir = os.path.join(repo_dir, "input")
+internal_dir = os.path.join(repo_dir, "internal")
+output_dir = os.path.join(repo_dir, "output")
+
+output_ly_dir = os.path.join(output_dir, "ly")
+templates_dir = os.path.join(internal_dir, "templates")
+generated_dir = output_ly_dir
+
+static_internal_paths = [
+    "ed_melicorum_header.ly",
+    "ed_melicorum_paper.ly",
+    "ed_melicorum_toc_preface.ly",
+]
+
 
 def write_roman(num):
-
     roman = OrderedDict()
     roman[1000] = "M"
     roman[900] = "CM"
@@ -48,24 +63,28 @@ def write_roman_version(ver_str):
     return out_str
 
 
-file_dir = os.path.dirname(os.path.realpath(__file__))
-repo_dir = os.path.join(file_dir, "../../")
-
-
 def get_cfg_data():
     cfg_data = {
         "gabctk_script_fname": "gabctk.py",
-        "doc_dir": os.path.join(repo_dir, "document"),
-        "data_dir": os.path.join(repo_dir, "data"),
+        "repo_dir": repo_dir,
+        "input_dir": input_dir,
+        "internal_dir": internal_dir,
+        "output_dir": output_dir,
+        "output_ly_dir": output_ly_dir,
+        "static_internal_paths": static_internal_paths,
+        "output_dir_ly_data": generated_dir,
+        "data_templates_dir": templates_dir,
+        "cfg_filename": "edimeli.config.json",
+        "input_meta_filename": "metadata.json",
     }
+    cfg_data["cfg_filepath"] = os.path.join(repo_dir, cfg_data["cfg_filename"])
+    cfg_data["gabctk_log_filepath"] = os.path.join(internal_dir, "gabctk_log.txt")
+    cfg_data["lilypond_log_filepath"] = os.path.join(internal_dir, "lilypond_log.txt")
 
-    with open(f"{cfg_data['data_dir']}/configs.json", "r") as file:
+    with open(f"{cfg_data['cfg_filepath']}", "r") as file:
         cfg_json = json.load(file)
         cfg_data["gabctk_dir"] = os.path.join(
             repo_dir, cfg_json["paths"]["gabctkDirectory"]
-        )
-        cfg_data["output_dir_ly_data"] = os.path.join(
-            repo_dir, cfg_json["paths"]["outputDirectoryLyData"]
         )
         cfg_data["output_dir_ly"] = os.path.join(
             repo_dir, cfg_json["paths"]["outputDirectoryLy"]
@@ -73,13 +92,6 @@ def get_cfg_data():
         cfg_data["output_dir_pdf"] = os.path.join(
             repo_dir, cfg_json["paths"]["outputDirectoryPdf"]
         )
-        cfg_data["data_templates_dir"] = os.path.join(
-            repo_dir, cfg_json["paths"]["dataTemplatesDirectory"]
-        )
-
-    with open(f"{cfg_data['data_dir']}/input.json", "r") as file:
-        input_cfg_json = json.load(file)
-        cfg_data["documents"] = input_cfg_json["documents"]
 
     return cfg_data
 
