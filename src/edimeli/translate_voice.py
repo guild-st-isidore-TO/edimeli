@@ -37,10 +37,10 @@ def translate_voice():
 
     for proj_id in input_dir_projects:
         doc_id = proj_id
-        doc_source_filename = f"{doc_id}.ly"
-        doc_source_path = os.path.join(
-            cfg_data["output_dir_ly_data"], doc_id, doc_source_filename
-        )
+        # doc_source_filename = f"{doc_id}.ly"
+        # doc_source_path = os.path.join(
+        #     cfg_data["output_dir_ly_data"], doc_id, doc_source_filename
+        # )
         doc_version = "0.8"
 
         proj_meta_path = os.path.join(
@@ -52,7 +52,57 @@ def translate_voice():
 
         in_doc = dict()
         in_doc.update(in_meta)
-        in_doc.update({"id": doc_id, "path": doc_source_path})
+
+        # ---------
+        # Templates
+
+        template_title_path = os.path.join(
+            cfg_data["data_templates_dir"], "ed_melicorum_title.ly"
+        )
+        template_layout_path = os.path.join(
+            cfg_data["data_templates_dir"], "layout_all.ly"
+        )
+        template_gt_all_path = os.path.join(
+            cfg_data["data_templates_dir"], "bookpart_gtr_all.ly"
+        )
+
+        gabc_file_meta = lege_tabulae_gabc(doc_id, in_doc["sourceDocs"])
+
+        # ------------------
+        # LilyPond variables
+
+        vars_vocals_path = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{doc_id}_vocals.ly"
+        )
+        vars_lyrics_path = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{doc_id}_lyrics.ly"
+        )
+        vars_gt_comp_path = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{doc_id}_gt_comp.ly"
+        )
+        vars_gt_solo_path = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{doc_id}_gt_solo.ly"
+        )
+
+        # ----------------------
+        # LilyPond bookpart sets
+
+        bookparts_gt_all = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{doc_id}_bkpts_gt_all.ly"
+        )
+
+        # ------------------------
+        # Document sections, parts
+
+        title_gt_all_path = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{doc_id}_title_gt_all.ly"
+        )
+        layout_gt_all_path = os.path.join(
+            cfg_data["output_dir_ly"], doc_id, f"{doc_id}_layout_gt_all.ly"
+        )
+
+        in_doc.update({"id": doc_id, "path": layout_gt_all_path})
+
         print("> in_doc")
         print("> " + json.dumps(in_doc, indent=2))
 
@@ -68,53 +118,7 @@ def translate_voice():
         print("> intermediate_ly_paths")
         print("> " + json.dumps(list(intermediate_ly_paths), indent=2))
 
-        # ---------
-        # Templates
-
-        template_title_path = os.path.join(
-            cfg_data["data_templates_dir"], "ed_melicorum_title.ly"
-        )
-        template_layout_path = os.path.join(
-            cfg_data["data_templates_dir"], "layout_all.ly"
-        )
-        template_gt_all_path = os.path.join(
-            cfg_data["data_templates_dir"], "bookpart_gtr_all.ly"
-        )
-
-        gabc_file_meta = lege_tabulae_gabc(in_doc["id"], doc_id, in_doc["sourceDocs"])
-
-        # ------------------
-        # LilyPond variables
-
-        vars_vocals_path = os.path.join(
-            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_vocals.ly"
-        )
-        vars_lyrics_path = os.path.join(
-            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_lyrics.ly"
-        )
-        vars_gt_comp_path = os.path.join(
-            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_gt_comp.ly"
-        )
-        vars_gt_solo_path = os.path.join(
-            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_gt_solo.ly"
-        )
-
-        # ----------------------
-        # LilyPond bookpart sets
-
-        bookparts_gt_all = os.path.join(
-            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_bkpts_gt_all.ly"
-        )
-
-        # ------------------------
-        # Document sections, parts
-
-        title_gt_all_path = os.path.join(
-            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_title_gt_all.ly"
-        )
-        layout_gt_all_path = os.path.join(
-            cfg_data["output_dir_ly"], doc_id, f"{in_doc['id']}_layout_gt_all.ly"
-        )
+        
 
         # ------------------------
         # Preparing to write to files
@@ -164,8 +168,8 @@ def translate_voice():
         # Copying LY vars, writing song part
         print(list(intermediate_ly_paths))
         for cgd_idx, conv_gabc_doc in enumerate(intermediate_ly_paths, start=1):
-            print(f'> cgd_idx: {cgd_idx}')
-            print(f'> conv_gabc_doc: {conv_gabc_doc}')
+            print(f"> cgd_idx: {cgd_idx}")
+            print(f"> conv_gabc_doc: {conv_gabc_doc}")
             filename_slug = os.path.basename(conv_gabc_doc).replace(".ly", "")
             filename_slug = filename_slug.replace("-", " ")
             filename_slug = filename_slug.title().replace(" ", "")

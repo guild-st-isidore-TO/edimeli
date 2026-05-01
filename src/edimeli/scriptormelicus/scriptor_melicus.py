@@ -27,6 +27,8 @@ template_replace_map = {
     "TemplateDocPart": "DocPart",
     "TemplateDocVersionLat": "DocVersionLat",
     "TemplateDocVersion": "DocVersion",
+    "TemplateOutLocation": "OutLocation",
+    "TemplateFilenameSlug": "FilenameSlug",
 }
 
 capitalized_vals = ["DocTitleLat"]
