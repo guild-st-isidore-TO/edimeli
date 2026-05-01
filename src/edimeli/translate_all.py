@@ -21,7 +21,7 @@ input_dir_projects = list(map(lambda path_obj: path_obj.name, input_dir_project_
 script_desc = "Transforms models in the given input project"
 
 
-def translate_voice():
+def translate_all():
     parser = argparse.ArgumentParser(description=script_desc)
     args = parser.parse_args()
 
@@ -226,5 +226,5 @@ def translate_voice():
     print("\n----------------------------------------------------------------\n")
 
 
-if __name__ == "__translate_voice__":
-    translate_voice()
+if __name__ == "__translate_all__":
+    translate_all()

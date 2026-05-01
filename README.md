@@ -27,20 +27,21 @@ Different sheet types for the same hymn:
 
 Sets up the project
 
-### `poetry run translate-voice`
+### `poetry run translate-all`
 
-...
+Translates all the contents of the `input/` directory, organized by folder.
+
+Finished documents are sent to the `output/` directory, organized with the same folder names that were passed in.
 
 ### Setup
 
 #### Requirements
 
-**gabctk** -- GABC conversion toolkit
+**gabctk** `v240107` -- GABC conversion toolkit
 
 https://github.com/jperon/gabctk/blob/master/README-en.md
 
-**LilyPond** -- Digital music typesetting
-
+**LilyPond** `v2.25.13` -- Digital music typesetting  
 https://lilypond.org/download.html
 
 #### Suggestions
@@ -51,7 +52,23 @@ https://github.com/frescobaldi/frescobaldi/wiki
 
 ## CONFIGURATION
 
-...
+Configurations can be done in `edimeli.config.json`
+
+### gabctk
+
+The `paths` object in the config file looks like:
+
+```json
+"paths": {
+    "gabctkDirectory": "../gabctk",
+    "outputDirectoryLy": "output/ly",
+    "outputDirectoryMidi": "output/midi",
+    "outputDirectoryPdf": "output/pdf",
+    "outputDirectoryXml": "output/xml"
+}
+```
+
+The `gabctkDirectory` needs to be configured to point to a local instance/clone of `gabctk`. See repo: https://github.com/jperon/gabctk
 
 ## CONTRIBUTING
 

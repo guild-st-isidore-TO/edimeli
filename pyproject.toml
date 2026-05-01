@@ -1,6 +1,6 @@
 [project]
 name = "edimeli"
-version = "0.1.1a19"
+version = "0.1.1"
 description = "EdiMeli is a music typesetting toolkit for musicians working with Gregorian notation (square notes)."
 authors = [{ name = "RJ Salvador", email = "salvador.workshop@gmail.com" }]
 readme = "README.md"
@@ -12,7 +12,7 @@ packages = [{include = "edimeli", from = "src"}]
 package-mode = false
 
 [tool.poetry.scripts]
-translate-voice = "src.edimeli.translate_voice:translate_voice"
+translate-all = "src.edimeli.translate_all:translate_all"
 translate-solo = "src.edimeli.translate_solo:translate_solo"
 translate-accomp = "src.edimeli.translate_accomp:translate_accomp"
 
