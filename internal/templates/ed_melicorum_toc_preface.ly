@@ -1,3 +1,5 @@
+\version "2.25.13"
+
 \bookpart {
   \markup \vspace #1
   \markuplist \table-of-contents

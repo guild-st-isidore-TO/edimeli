@@ -154,7 +154,7 @@ def translate_voice():
         # ------------------------
         # Writing output
 
-        doc_data = {
+        title_data = {
             "DocTitle": in_doc["name"],
             "DocTitleLat": in_doc["nameLat"],
             "DocPart": "Complete Guitar Version",
@@ -162,8 +162,13 @@ def translate_voice():
             "DocVersion": doc_version,
             "DocVersionLat": write_roman_version(doc_version),
         }
-        write_title_ly(title_gt_all_path, template_title_path, doc_data)
-        write_layout_ly(layout_gt_all_path, template_layout_path, doc_data)
+        write_title_ly(title_gt_all_path, template_title_path, title_data)
+
+        layout_data = {
+            "FilenameSlug": doc_id,
+            "OutLocation": '.',
+        }
+        write_layout_ly(layout_gt_all_path, template_layout_path, layout_data)
 
         # Copying LY vars, writing song part
         print(list(intermediate_ly_paths))

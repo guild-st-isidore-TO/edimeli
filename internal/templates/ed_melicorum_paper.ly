@@ -1,3 +1,5 @@
+\version "2.25.13"
+
 \paper {
   %% book paper, which is inherited by all children bookparts
   ragged-last-bottom = ##t
