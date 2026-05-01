@@ -1,0 +1,32 @@
+{
+    "tags": [],
+    "name": "Marian Hymns",
+    "nameLat": "Hymni Mariæ",
+    "author": "rjsalvadorr",
+    "sourceDocs": [
+        {
+            "id": "ave_maria",
+            "keyTranspose": 2,
+            "path": "01-ave-maria.gabc",
+            "name": "Ave Maria"
+        },
+        {
+            "id": "ave_mar_ste",
+            "keyTranspose": 0,
+            "path": "02-ave-maris-stella.gabc",
+            "name": "Ave Maris Stella"
+        },
+        {
+            "id": "stabat_mat",
+            "keyTranspose": 0,
+            "path": "03-stabat-mater.gabc",
+            "name": "Stabat Mater"
+        },
+        {
+            "id": "sub_tuum",
+            "keyTranspose": -4,
+            "path": "04-sub-tuum-praesidium.gabc",
+            "name": "Sub Tuum Præsidium"
+        }
+    ]
+}

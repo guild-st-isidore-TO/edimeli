@@ -1,0 +1,10 @@
+{
+    "version": "0.1.0",
+    "paths": {
+        "gabctkDirectory": "../gabctk",
+        "outputDirectoryLy": "output/ly",
+        "outputDirectoryMidi": "output/midi",
+        "outputDirectoryPdf": "output/pdf",
+        "outputDirectoryXml": "output/xml"
+    }
+}

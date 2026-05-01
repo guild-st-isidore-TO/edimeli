@@ -1,0 +1,32 @@
+{
+    "tags": [],
+    "name": "Marian Antiphons (Solemn Tone)",
+    "nameLat": "Antiphonæ Mariæ (Tono Solemnis)",
+    "author": "rjsalvadorr",
+    "sourceDocs": [
+        {
+            "id": "alma_red_sol",
+            "keyTranspose": -3,
+            "path": "01-alma-redemptoris-mater-sol.gabc",
+            "name": "Alma Redemptoris Mater"
+        },
+        {
+            "id": "ave_reg_sol",
+            "keyTranspose": -5,
+            "path": "02-ave-regina-caelorum-sol.gabc",
+            "name": "Ave Regina Cælorum"
+        },
+        {
+            "id": "regina_cae_sol",
+            "keyTranspose": 0,
+            "path": "03-regina-caeli-sol.gabc",
+            "name": "Regina Cæli"
+        },
+        {
+            "id": "salve_reg_sol",
+            "keyTranspose": 0,
+            "path": "04-salve-regina-sol.gabc",
+            "name": "Salve Regina"
+        }
+    ]
+}
