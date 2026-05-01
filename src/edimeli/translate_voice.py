@@ -21,11 +21,6 @@ input_dir_projects = list(map(lambda path_obj: path_obj.name, input_dir_project_
 script_desc = "Transforms models in the given input project"
 
 
-def get_intermediate_ly_paths(source_doc):
-    cleaned_path = source_doc["path"].replace(".gabc", ".ly")
-    return os.path.join(cfg_data["output_dir_ly_data"], cleaned_path)
-
-
 def translate_voice():
     parser = argparse.ArgumentParser(description=script_desc)
     args = parser.parse_args()
@@ -61,7 +56,15 @@ def translate_voice():
         print("> in_doc")
         print("> " + json.dumps(in_doc, indent=2))
 
-        intermediate_ly_paths = map(get_intermediate_ly_paths, in_doc["sourceDocs"])
+        def get_intermediate_ly_paths(source_doc):
+            print(f"> get_intermediate_ly_paths()")
+            print(f"    source_doc: {source_doc}")
+            cleaned_path = source_doc["path"].replace(".gabc", ".ly")
+            return os.path.join(cfg_data["output_dir_ly_data"], doc_id, cleaned_path)
+
+        intermediate_ly_pathmap = map(get_intermediate_ly_paths, in_doc["sourceDocs"])
+        intermediate_ly_paths = list(intermediate_ly_pathmap)
+        print(type(intermediate_ly_paths))
         print("> intermediate_ly_paths")
         print("> " + json.dumps(list(intermediate_ly_paths), indent=2))
 
@@ -70,6 +73,9 @@ def translate_voice():
 
         template_title_path = os.path.join(
             cfg_data["data_templates_dir"], "ed_melicorum_title.ly"
+        )
+        template_layout_path = os.path.join(
+            cfg_data["data_templates_dir"], "layout_all.ly"
         )
         template_gt_all_path = os.path.join(
             cfg_data["data_templates_dir"], "bookpart_gtr_all.ly"
@@ -153,10 +159,13 @@ def translate_voice():
             "DocVersionLat": write_roman_version(doc_version),
         }
         write_title_ly(title_gt_all_path, template_title_path, doc_data)
-        write_layout_ly(title_gt_all_path, template_title_path, doc_data)
+        write_layout_ly(layout_gt_all_path, template_layout_path, doc_data)
 
         # Copying LY vars, writing song part
+        print(list(intermediate_ly_paths))
         for cgd_idx, conv_gabc_doc in enumerate(intermediate_ly_paths, start=1):
+            print(f'> cgd_idx: {cgd_idx}')
+            print(f'> conv_gabc_doc: {conv_gabc_doc}')
             filename_slug = os.path.basename(conv_gabc_doc).replace(".ly", "")
             filename_slug = filename_slug.replace("-", " ")
             filename_slug = filename_slug.title().replace(" ", "")

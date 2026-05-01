@@ -1,6 +1,6 @@
 [project]
 name = "edimeli"
-version = "0.1.1a15"
+version = "0.1.1a16"
 description = "EdiMeli is a music typesetting toolkit for musicians working with Gregorian notation (square notes)."
 authors = [{ name = "RJ Salvador", email = "salvador.workshop@gmail.com" }]
 readme = "README.md"
